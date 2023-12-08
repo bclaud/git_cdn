@@ -15,6 +15,15 @@
       {
         packages = rec {
           git-cdn = pkgs.callPackage ./default.nix { };
+
+          script = pkgs.writeShellApplication {
+              runtimeInputs = [git-cdn];
+              name = "git-cdn-start";
+              text = ''
+              ${git-cdn}/bin/gunicorn git_cdn:app:app -b :8000
+              '';
+          };
+
           default = git-cdn;
         };
         apps = rec {
