@@ -65,8 +65,13 @@ def make_app(upstream):
     return _app
 
 
+# Assim o startup nao funciona. Pelo o que eu entendi, no build do Nix ele nao tratou
+# como resultado, logo, app nao existe
 if os.getenv("GITSERVER_UPSTREAM") and os.getenv("WORKING_DIRECTORY"):
     app = make_app(os.getenv("GITSERVER_UPSTREAM", None))
+
+# Assim funcionaria
+app = make_app("something")
 
 
 def main():

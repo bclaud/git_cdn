@@ -56,10 +56,7 @@ let app = poetry2nix.mkPoetryApplication {
   };
 in
 
-pkgs.runCommand "app-env-test" { } ''
-  ${depEnv}/bin/gunicorn -c ${./config.py} git_cdn.app:app -b :8000
-''
-
+app.dependencyEnv
 
 ### Executar programa assim:
 # $(POETRY) run gunicorn -c config.py git_cdn.app:app -b :8000
